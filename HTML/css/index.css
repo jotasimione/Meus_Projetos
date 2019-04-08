@@ -1,0 +1,340 @@
+.palavra-home {
+    animation: aparece 2s;
+}
+.banner-twitter{
+    animation: aparece 0.5s;
+    animation-delay: 2s;
+    animation-fill-mode: both;
+}
+@keyframes aparece {
+    0% {
+        opacity: 0;
+        transform: scale(0.001);
+    }
+
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    display: block;
+    perspective: 6px;
+    perspective-origin: 50% 160px;
+}
+
+.palavras-home, .titulo-principal {
+    transform-style: preserve-3d;
+}
+
+header {
+    position: relative;
+}
+
+.foto-home {
+    height: 200px;
+    border-radius: 50%;
+}
+.saudacao p {
+    font-size: 1.5em;
+    color: #99A;
+    line-height: 1;
+    padding: 2em;
+}
+.saudacao-inicio {
+    font-size: 3em;
+    color: #889;
+}
+.saudacao-ultima-linha {
+    text-align: right;
+    display: block;
+}
+.saudacao strong {
+    font-size: 2em;
+    color: #000;
+}
+.saudacao em {
+    color: #851944;
+    font-size: 4em;
+    transform: rotate(-5deg) skew(-10deg);
+    display: inline-block; 
+    animation: floating 2s infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    position: relative;
+}
+
+.saudacao:hover em{
+    animation-play-state: paused
+}
+
+@keyframes floating{
+    0%{
+        top: 0;
+        transform: rotate(0deg) skew(10deg);
+    }
+    100%{
+        top: .8em;
+        transform:rotate(-5deg) skew(-10deg);
+    }
+}
+
+
+.botao-index {
+    font-size: 1.25em;
+    background-color: #851944;
+    color: #FFF;
+    padding: .5em;
+    border: .2em solid black;
+    width: 40ch;
+    margin: 2em auto;
+    display: block;
+    text-align: center;
+}
+.secao-inicio {
+    padding: 2em;
+}
+.secao-inicio h2 {
+    font-size: 3em;
+    text-transform: uppercase;
+    margin-bottom: .5em;
+    text-shadow: 2px 2px #000;
+}
+.trabalhos {
+    background-image: linear-gradient(to right bottom,
+                                        transparent,
+                                        transparent 49%, 
+                                        rgba(0,0,0,0.1) 50%, 
+                                        transparent 51%, 
+                                        transparent);
+    background-size: 20px 20px;
+    background-attachment: fixed;
+    background-color: #3C1D3D;
+    border-top: .5em solid #000;
+    border-bottom: .5em solid #000;
+}
+.trabalhos h2 {
+    color: #FFF;
+}
+.trabalhos ul {
+    display: flex;
+}
+.trabalhos li {
+    flex: 1;
+    border: .5em solid black;
+}
+.trabalhos li:first-child{
+    order: 2;
+    transform: scale(1.2);
+}
+.trabalhos li:nth-child(2){
+    order: 1;
+}
+.trabalhos li:last-child{
+    order: 3;
+}
+.trabalhos img {
+    width: 100%;
+    display: block;
+}
+.blog {
+    background-image: linear-gradient(to left bottom,
+                                        transparent,
+                                        transparent 49%, 
+                                        rgba(0,0,0,0.1) 50%, 
+                                        transparent 51%, 
+                                        transparent);
+    background-size: 20px 20px;
+    background-attachment: fixed;
+    background-color: #999;
+    color: #FFF;
+    border-bottom: .5em solid #851944;
+}
+.blog small {
+    position: relative;
+    top: -2em;
+}
+.blog li a {
+    color: #FCF;
+    padding: .5em;
+    display: block;
+}
+footer {
+    background-color: #000;
+    color: #FFF;
+    padding: 2em;
+}
+footer h2 {
+    font-size: 3em;
+}
+footer a {
+    color: #F99;
+}
+main {
+    width: 100%;
+    padding-bottom: 0;
+    float: none;
+}
+
+.palavra-home {
+    font-family: "Shadows Into Light", cursive;
+    font-weight: bold;
+    color: (255, 127, 127, 0.5);
+    position: absolute;
+}
+
+.eficiencia {
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%) translateZ(4px) rotate(-5deg) scale(.25);
+    opacity: .3;
+}
+
+.boas-praticas {
+    top: 70%;
+    left: 20%;
+    transform: translate(-50%, -50%) translateZ(1px) rotate(10deg) scale(.25);
+    opacity: .3;
+}
+
+.codigo-limpo {
+    top: 45%;
+    left: 25%;
+    transform: translate(-50%, -50%) translateZ(2px) rotate(-10deg) scale(.25);
+    opacity: .6;
+}
+
+.css3 {
+    top: 55%;
+    left: 35%;
+    transform: translate(-50%, -50%) translateZ(2px) rotate(5deg) scale(.25);
+    opacity: .6;
+}
+
+.html5 {
+    top: 30%;
+    left: 65%;
+    transform: translate(-50%, -50%) translateZ(2px) rotate(10deg) scale(.25);
+    opacity: .6;
+}
+
+.javascript {
+    top: 15%;
+    left: 60%;
+    transform: translate(-50%, -50%) translateZ(1px) rotate(-5deg) scale(.25);
+    opacity: .3;
+}
+
+.acessibilidade {
+    top: 30%;
+    left: 35%;
+    transform: translate(-50%, -50%) translateZ(3px) rotate(-5deg) scale(.25);
+    opacity: .8;
+}
+
+.responsivo {
+    top: 40%;
+    left: 40%;
+    transform: translate(-50%, -50%) translateZ(3px) rotate(10deg) scale(.25);
+    opacity: .8;
+}
+
+.otimizacoes {
+    top: 70%;
+    left: 65%;
+    transform: translate(-50%, -50%) translateZ(2px) rotate(-5deg) scale(.25);
+    opacity: .6;
+}
+
+.agilidade {
+    top: 75%;
+    left: 35%;
+    transform: translate(-50%, -50%) translateZ(1px) rotate(5deg) scale(.25);
+    opacity: .3;
+}
+
+.design {
+    top: 40%;
+    left: 60%;
+    transform: translate(-50%, -50%) translateZ(2px) rotate(10deg) scale(.25);
+    opacity: .6;
+}
+
+.blog {
+    position: relative;
+}
+
+.blog .inicio-post {
+    position: absolute;
+    top: 4em;
+    height: 9em;
+    left: 30%;
+    right: 4em;
+    background-color: #F2FFFC;
+    color: #000;
+    padding: 1.5em;
+    display: none;
+}
+
+.blog a:hover + .inicio-post,
+.blog a:focus + .inicio-post {
+    display: block;
+}
+
+.blog a:hover,
+.blog a:focus  {
+    background-color: #F2FFFC;
+    color: #F26;
+}
+
+.botao-index:hover,
+.botao-index:focus {
+    background-color: #C54974;
+    color: white;
+    box-shadow: 0 0 1em #FA9;
+}
+.botao-index {
+    text-decoration: none;
+    transition: .5s;
+}
+
+.blog li {
+    width: 30%;
+}
+
+.banner-twitter {
+    width: 14em;
+    line-height: 1;
+    padding: 1em 0;
+    box-sizing: border-box;
+
+    text-align: center;
+    text-decoration: none;
+    background-color: #3C1D3D;
+    color: white;
+    border: .25em solid black;
+
+    font-size: 1.2em;
+    font-family: "Open Sans Condensed", sans-serif;
+
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform-origin: 0 0;
+    transform: translate(calc(.707 * (3.5em - 100%) + 100%), calc(-.707 * 3.5em)) rotate(45deg);
+}
+
+.palavras-home {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.palavras-home li {
+    font-size: 400%;
+}
