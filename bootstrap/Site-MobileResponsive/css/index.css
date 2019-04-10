@@ -1,0 +1,33 @@
+#panel-about-us{
+    margin-top: 1em;
+}
+.title-highlight{
+    background-color: blue;
+    color: white;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: 0;
+}
+
+#radio-group,
+#select-group {
+    display: inline-block;
+    width: 50%;
+    margin-top: 0;
+    vertical-align: top;
+}
+
+#radio-group .radio:first-child{
+    margin-top: 0;
+}
+
+footer{
+    background-color: #333;
+    color: white;
+    padding: 1em; 
+    margin-top: 1em;  
+}
+
+footer address:last-child{
+    margin-bottom: 0;
+}
