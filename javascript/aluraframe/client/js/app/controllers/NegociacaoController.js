@@ -1,33 +1,18 @@
 class NegociacaoController {
     constructor(){
+        this._ordemAtual = '';
+
         let $ = document.querySelector.bind(document);
         this._inputData        = $("#data");
         this._inputQuantidade  = $("#quantidade");
         this._inputValor       = $("#valor");
         this._formNegociacao   = $(".form");
-        
-        let self = this;
-        this._listaNegociacoes = new Proxy(new ListaNegociacoes(),{
-            get(target, prop, receiver){
-                if(["adiciona","limpa"].includes(prop) && typeof(target[prop]) == typeof(Function)){
 
-                    return function(){
-                        Reflect.apply(target[prop], target, arguments);
-                        self._negociacaoView.update(target);
-                    }
-                }
-                return Reflect.get(target, prop, receiver);
-            }
-        });
+        this._listaNegociacoes = new Bind(
+            new ListaNegociacoes(), new NegociacoesView($("#negociacaoView")), "adiciona","limpa","ordena","inverteOrdem");
 
-
-
-
-        this._negociacaoView   = new NegociacoesView($("#negociacaoView"));
-        this._negociacaoView.update(this._listaNegociacoes);
-
-        this._mensagem = new Mensagem();
-        this._mensagemView = new MensagemView($("#mensagemView"));
+        this._mensagem = new Bind(
+            new Mensagem(), new MensagemView($("#mensagemView")), "montaMensagem", "titulo", "texto");
     }
 
     adiciona(event){
@@ -48,6 +33,30 @@ class NegociacaoController {
 
         this._mensagem.montaMensagem("Sucesso!","As negociações foram apagadas.");
         this._mensagemView.update(this._mensagem); 
+    }
+
+    importaNegociacoes(event){
+        event.preventDefault();
+
+        let service = new NegociacaoService();
+        Promise.all(service.obterNegociacoes())
+            .then(negociacoes => { 
+                negociacoes
+                    .reduce((arrayAchatado, array) => arrayAchatado.concat(array),[])
+                    .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));                
+                this._mensagem.montaMensagem("Sucesso","As Negociações foram importadas com sucesso.");
+            })
+            .catch(erro => this._mensagem.montaMensagem("Erro", erro));
+    }
+
+    ordena(coluna){
+        if(this._ordemAtual == coluna) {
+            this._listaNegociacoes.inverteOrdem();
+        } else {
+            this._listaNegociacoes.ordena((a, b) => a[coluna] - b[coluna]);
+        }
+        this._ordemAtual = coluna;       
+        
     }
 
     _criaNegociacao(){
