@@ -1,0 +1,66 @@
+
+<!-- saved from url=(0074)file:///C:/workspace/_my-repository/javascript/aluraframe/client/post.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Negociações</title>
+    <link rel="stylesheet" href="file:///C:/workspace/_my-repository/javascript/aluraframe/client/css/bootstrap.css">
+    <link rel="stylesheet" href="file:///C:/workspace/_my-repository/javascript/aluraframe/client/css/bootstrap-theme.css">
+</head>
+
+<body class="container">
+    <h1>Cadastro de Negociações</h1>
+    <form class="form">
+
+        <div class="form-group">
+            <label for="data">Data</label>
+            <input type="date" id="data" class="form-control" required="" autofocus="">        
+        </div>    
+
+        <div class="form-group">
+            <label for="quantidade">Quantidade</label>
+            <input type="number" min="1" step="1" id="quantidade" class="form-control" value="1" required="">
+        </div>
+
+        <div class="form-group">
+            <label for="valor">Valor</label>
+            <input id="valor" type="number" class="form-control" min="0.01" step="0.01" value="0.0" required="">
+        </div>
+
+        <button class="btn btn-primary" type="submit" onclick="sendPost(event)">Enviar dados para servidor</button>
+    </form>
+
+    <script src="file:///C:/workspace/_my-repository/javascript/aluraframe/client/js/app/services/HttpService.js"></script>
+    <script src="file:///C:/workspace/_my-repository/javascript/aluraframe/client/js/app/services/NegociacaoService.js"></script>
+    <script>
+
+        function sendPost(event) {
+
+            event.preventDefault();
+            
+            let $ = document.querySelector.bind(document);
+            inputData = $('#data');
+            inputQuantidade = $('#quantidade');
+            inputValor = $('#valor');
+
+            form = $(".form");
+
+            let negociacao = {
+                data: inputData.value,
+                quantidade: inputQuantidade.value,
+                valor: inputValor.value
+            };
+
+            let service = new NegociacaoService();
+            service.enviaNegociacaoParaServidor(negociacao)
+                .then((msg) => {
+                    form.reset();
+                    inputData.focus();
+                    alert(msg)
+                })
+                .catch(erro => {
+                    alert(erro);
+                });
+        }
+    </script>
+
+</body></html>
