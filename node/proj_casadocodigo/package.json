@@ -10,8 +10,11 @@
   "author": "José Suzano Simione",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "1.19.0",
     "express": "^4.16.4",
+    "express-validator": "5.3.1",
     "marko": "4.16.11",
+    "method-override": "3.0.0",
     "sqlite": "3.0.3"
   },
   "devDependencies": {
