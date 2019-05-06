@@ -25,7 +25,7 @@ class LivroDao {
         });     
     }
 
-    atualiza(livro){
+    edita(livro){
         return new Promise((resolve, reject) => {
             this._db.run(`UPDATE livros SET titulo = ?, preco = ?, descricao = ? WHERE id = ?`,
                 [   
@@ -36,7 +36,7 @@ class LivroDao {
                 ],
                 (erro) => {
                     if (erro) {
-                        return reject(`Não foi possível atualizar o Livro do ID: ${livro.id}!`)
+                        return reject(`Não foi possível editar o Livro do ID: ${livro.id}!`)
                     }
                     resolve();
                 }
@@ -57,7 +57,7 @@ class LivroDao {
         });         
     }
 
-    adiciona(livro){
+    cadastra(livro){
         return new Promise((resolve, reject) => {
             this._db.run(`
                 INSERT INTO livros (titulo, preco, descricao)
