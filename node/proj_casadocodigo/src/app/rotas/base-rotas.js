@@ -5,4 +5,5 @@ const rotasBase = BaseController.rotas();
 module.exports = (app) => {
     app.get(rotasBase.home, baseController.home());  
     app.get(rotasBase.login, baseController.login());  
+    app.post(rotasBase.login, baseController.efetuaLogin());  
 }
