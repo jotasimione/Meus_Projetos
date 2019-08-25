@@ -14,54 +14,83 @@ function checkIdProject(req, res, next) {
   return next();
 }
 
-function countRequest(req, res, next) {
-  reqCount++;
-  console.log(`Request Count: ${reqCount}`);
+function checkProjectExists(req, res, next) {
+  const { id } = req.params;
+
+  let project = projects.find(p => p.id == id);
+
+  if (!project.id) {
+    return res.status(400).json({ error: `Project with ID: ${id} not exists` });
+  }
+
   return next();
 }
 
-server.post('/projects', countRequest, (req, res) => {
+function checkBeforeInsert(req, res, next) {
+  const { id } = req.body;
+
+  let project = projects.find(p => p.id == id);
+
+  if (project) {
+    return res
+      .status(400)
+      .json({ error: `Project with ID: ${id} already exists` });
+  }
+
+  return next();
+}
+
+function countRequest(req, res, next) {
+  console.log(`Request Count: ${++reqCount}`);
+  return next();
+}
+
+server.use(countRequest);
+
+server.post('/projects', checkBeforeInsert, (req, res) => {
   projects.push(req.body);
   return res.send('Project was created with success!');
 });
 
-server.post('/projects/:id/tasks', countRequest, checkIdProject, (req, res) => {
+server.post(
+  '/projects/:id/tasks',
+  checkIdProject,
+  checkProjectExists,
+  (req, res) => {
+    const { id } = req.params;
+    const { title } = req.body;
+
+    let project = projects.find(p => p.id == id);
+    project.tasks.push(title);
+
+    return res.json(projects);
+  }
+);
+
+server.get('/projects', (req, res) => {
+  return res.json(projects);
+});
+
+server.put('/projects/:id', checkIdProject, checkProjectExists, (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
 
-  projects.forEach(project => {
-    if (project.id == id) {
-      project.tasks.push(title);
-    }
-  });
+  let project = projects.find(p => p.id == id);
+  project.title = title;
 
-  return res.json(projects);
+  return res.json(project);
 });
 
-server.get('/projects', countRequest, (req, res) => {
-  return res.json(projects);
-});
+server.delete(
+  '/projects/:id',
+  checkIdProject,
+  checkProjectExists,
+  (req, res) => {
+    const { id } = req.params;
 
-server.put('/projects/:id', countRequest, checkIdProject, (req, res) => {
-  const { id } = req.params;
+    let indexProject = projects.findIndex(p => p.id == id);
+    projects.splice(indexProject, 1);
 
-  projects.forEach((project, index) => {
-    if (project.id == id) {
-      projects[index] = req.body;
-    }
-  });
-
-  return res.json(projects);
-});
-
-server.delete('/projects/:id', countRequest, checkIdProject, (req, res) => {
-  const { id } = req.params;
-
-  projects.forEach((project, index) => {
-    if (project.id == id) {
-      projects[index].delete;
-    }
-  });
-
-  return res.json('Project was deleted with success!');
-});
+    return res.json('Project was deleted with success!');
+  }
+);
