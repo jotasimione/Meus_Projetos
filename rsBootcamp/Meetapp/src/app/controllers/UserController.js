@@ -9,6 +9,15 @@ class UserController {
     const { id, name, email, provider } = await User.create(req.body);
     return res.json({ id, name, email, provider });
   }
+
+  async update(req, res) {
+    if (!(await User.findOne({ where: { email: req.body.email } }))) {
+      return res.status(400).json({ error: 'E-mail not found' });
+    }
+
+    const { id, name, email, provider } = await User.update(req.body);
+    return res.json({ id, name, email, provider });
+  }
 }
 
 export default new UserController();
