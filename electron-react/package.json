@@ -26,7 +26,7 @@
     "@rescripts/cli": "^0.0.13",
     "@rescripts/rescript-env": "^0.0.11",
     "concurrently": "^5.0.0",
-    "electron": "^6.0.12",
+    "electron": "^15.5.5",
     "electron-builder": "^21.2.0",
     "nodemon": "^1.19.1",
     "wait-on": "^3.3.0"
